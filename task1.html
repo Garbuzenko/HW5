@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конкурс ждунов</title>
+</head>
+<body>
+    <p>Конкурс ждунов!</p>
+
+    <p id="time"></p>
+
+    <script>
+        function pad(num, size) {
+            var s = "00" + num;
+            return s.substr(s.length-size);
+        }
+
+        let interval = 2 * 60 * 60 * 1000
+        let nowDate = Date.now()
+        let dateAlert = nowDate + interval;
+        let strTime;
+        function makeAlert(){ 
+            alert("Вы выйграли конкурс ждунов!");
+        };
+
+        function step(){ 
+            let delta = Math.floor(( dateAlert - Date.now() ) / 1000 )
+            let hh = Math.floor(delta / 3600) % 24 
+            let mm = Math.floor(delta / 60) % 60 
+            let ss = delta % 60 
+            document.getElementById('time').textContent = `${pad(hh, 2)}:${pad(mm, 2)}:${pad(ss, 2)}`
+            
+            setTimeout(step, 100);
+        };
+
+
+        setTimeout(step, 100);
+        setInterval(makeAlert, interval);
+    </script>
+
+</body>
+</html>
